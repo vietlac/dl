@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VietLacSo2022;
+using WordPressPCL.Models;
 
 namespace TestLauncherAPI
 {
@@ -72,14 +73,20 @@ namespace TestLauncherAPI
 
         static async Task Main(string[] args)
         {
-            await Requestor.Instance.Download("https://dl.dropboxusercontent.com/s/09g380ty3f25y69/MD5Check.rar", null, 300000, null);
-            await Login("kminchelle", "0lelplR");
-            await Search("no matter how much");
-            await ContactUs();
-            var html = await Requestor.Instance.Upload<string>("https://cgi-lib.berkeley.edu/ex/fup.cgi",
-                new Dictionary<string, string> { { "note", "this is a test!" } },
-                60000, @"C:\Users\ADMIN\Desktop\CÀI ĐẶT VIỆT LẠC SỚ ĐẶC BIỆT 09.11.txt", "upfile");
-            Console.WriteLine(html);
+            //await Requestor.Instance.Download("https://dl.dropboxusercontent.com/s/09g380ty3f25y69/MD5Check.rar", null, 300000, null);
+            //await Login("kminchelle", "0lelplR");
+            //await Search("no matter how much");
+            //await ContactUs();
+            //var html = await Requestor.Instance.Upload<string>("https://cgi-lib.berkeley.edu/ex/fup.cgi",
+            //    new Dictionary<string, string> { { "note", "this is a test!" } },
+            //    60000, @"C:\Users\ADMIN\Desktop\CÀI ĐẶT VIỆT LẠC SỚ ĐẶC BIỆT 09.11.txt", "upfile");
+            //Console.WriteLine(html);
+
+            VietLacWordPress vlwp = new VietLacWordPress();
+            var user = await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
+            Console.WriteLine($"Hello {user.Name}, ur password is \"{user.Password}\"");
+            user = await vlwp.ChangeFullName("Việt Lạc dev");
+            Console.WriteLine($"Hello {user.Name}, ur password is \"{user.Password}\"");
             Console.ReadLine();
         }
     }

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
+using WordPressPCL;
 
 namespace VietLacSo2022
 {
@@ -42,19 +43,15 @@ namespace VietLacSo2022
             }
         }
         private static CookieContainer cookieContainer;
-        private static HttpClientHandler clienthandler;
-        private readonly HttpClient client;
+        private static HttpMessageHandler clienthandler;
 
         Requestor() {
             cookieContainer = new CookieContainer();
-            clienthandler = new HttpClientHandler {
-                AllowAutoRedirect = true,
-                UseCookies = true,
-                CookieContainer = cookieContainer
-            };
-            client = new HttpClient(clienthandler);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            clienthandler = new RequestLoggingHandler(new RequestHandler(cookieContainer), true);
+            Client = new HttpClient(clienthandler);
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             SetDefaultHeaders(new Dictionary<string, string> { { "User-Agent", "Mozilla/5.0 (compatible; BrainhubBot/1.0; +http://brainhub.vn/bot.html)" } });
+            WpClient = new WordPressClient(Client);
         }
 
         public void SetDefaultHeaders(IEnumerable<KeyValuePair<string, string>> headers)
@@ -63,22 +60,26 @@ namespace VietLacSo2022
             {
                 foreach (var header in headers)
                 {
-                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    Client.DefaultRequestHeaders.Add(header.Key, header.Value);
                 }
             }
         }
 
         public string BaseAddress
         {
-            get => client.BaseAddress.ToString();
+            get => Client.BaseAddress.ToString();
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    client.BaseAddress = new Uri(value);
+                    Client.BaseAddress = new Uri(value);
                 }
             }
         }
+
+        public WordPressClient WpClient { get; set; }
+
+        public HttpClient Client { get; }
 
         public async Task<HttpResponseMessage> MakeRequest(
             HttpMethod method, string url, IEnumerable<KeyValuePair<string, string>> reqParams, RequestDataType dataType, IEnumerable<KeyValuePair<string, string>> headers, 
@@ -146,7 +147,7 @@ namespace VietLacSo2022
                     request.Content = content;
                 }
             }
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await Client.SendAsync(request, cancellationToken);
             return response;
         }
 
