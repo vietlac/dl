@@ -25,6 +25,7 @@ namespace VietLacSo2022
         private string CustomizeHttpResponse(string content)
         {
             // Console.WriteLine(content);
+            // TODO: modify JSON response if necessary
             return content;
         }
 
@@ -73,6 +74,16 @@ namespace VietLacSo2022
             client.Auth.Logout();
         }
 
+        public async Task<User> RegisterNewUser(string userName, string email, string password)
+        {
+            if (!Utils.IsEmail(email)) {
+                throw new InvalidArgumentException("địa chỉ email không hợp lệ");
+            }
+            var user = new User(userName, email, password);
+            user = await client.Users.CreateAsync(user);
+            return user;
+        }
+
         public async Task<User> GetUserProfile()
         {
             return await client.Users.GetCurrentUser();
@@ -99,7 +110,7 @@ namespace VietLacSo2022
         {
             if (string.IsNullOrEmpty(fullname))
             {
-                throw new ArgumentNullException("tên người dùng không được phép null hoặc rỗng");
+                throw new InvalidArgumentException("tên người dùng không được phép null hoặc rỗng");
             }
             var user = await GetUserProfile();
             if (user.Name != fullname)
@@ -114,7 +125,7 @@ namespace VietLacSo2022
         {
             if (string.IsNullOrEmpty(password))
             {
-                throw new ArgumentNullException("mật khẩu không được phép null hoặc rỗng");
+                throw new InvalidArgumentException("mật khẩu không được phép null hoặc rỗng");
             }
             var user = await GetUserProfile();
             user.Password = password;

@@ -19,8 +19,18 @@ namespace VietLacSo2022
             AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
         }
 
+        private void RemoveMalformAuthorizationHeader(HttpRequestMessage request)
+        {
+            var authorization = request.Headers.Authorization;
+            if (string.IsNullOrEmpty(authorization.Parameter))
+            {
+                request.Headers.Authorization = null;
+            }
+        }
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            RemoveMalformAuthorizationHeader(request);
             var response = await base.SendAsync(request, cancellationToken);
             return response;
         }
