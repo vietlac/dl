@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherAPI", "LauncherAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLauncherAPI", "TestLauncherAPI\TestLauncherAPI.csproj", "{C46952A8-2280-421B-9E35-F8EC3485A806}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordPressPCL", "..\WordPressPCL\WordPressPCL\WordPressPCL.csproj", "{554E423A-0D3C-4959-9166-C0F2DD6D990D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C46952A8-2280-421B-9E35-F8EC3485A806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C46952A8-2280-421B-9E35-F8EC3485A806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C46952A8-2280-421B-9E35-F8EC3485A806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

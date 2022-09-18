@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WordPressPCL;
 using WordPressPCL.Models;
+using WordPressPCL.Utility;
 
 namespace VietLacSo2022
 {
@@ -25,30 +26,9 @@ namespace VietLacSo2022
         private string CustomizeHttpResponse(string content)
         {
             // Console.WriteLine(content);
-            // TODO: modify JSON response if necessary
+            // TODO: modify JSON response of WordPressPCL if necessary
             return content;
         }
-
-        public WordPressClient ChangePath(string path = "wp/v2/")
-        {
-            if (!client.WordPressUri.AbsolutePath.TrimEnd('/').EndsWith(path.TrimEnd('/')))
-            {
-                client = new WordPressClient(Requestor.Instance.Client, path);
-                client.HttpResponsePreProcessing = CustomizeHttpResponse;
-                Requestor.Instance.WpClient = client;
-            }
-            return client;
-        }
-
-        public WordPressClient ChangePathToWooCommerce()
-        {
-            return ChangePath("wc/v3/");
-        }
-
-        public WordPressClient ChangePathToWordPressV2()
-        {
-            return ChangePath("wp/v2/");
-;        }
 
         public async Task UpdateAccessToken(string username, string password)
         {
@@ -131,6 +111,22 @@ namespace VietLacSo2022
             user.Password = password;
             user = await UpdateUserProfile(user);
             return user;
+        }
+
+        public async Task<IEnumerable<Product>> GetProducts(int page = 1, int pageSize = 10, string searchPhrase = null)
+        {
+            ProductsQueryBuilder q = new ProductsQueryBuilder() { Page = page, PerPage = pageSize, Search = searchPhrase };
+            return await client.Products.ListProductsAsync(q);
+        }
+
+        public async Task<Product> ProductDetail(object id)
+        {
+            return await client.Products.GetProductAsync(id);
+        }
+
+        public async Task<int> TotalProducts()
+        {
+            return await client.Products.GetCountAsync();
         }
     }
 }

@@ -47,9 +47,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WordPressPCL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WordPressPCL.2.0.0\lib\netstandard2.0\WordPressPCL.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -60,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WordPressPCL\WordPressPCL\WordPressPCL.csproj">
+      <Project>{554e423a-0d3c-4959-9166-c0f2dd6d990d}</Project>
+      <Name>WordPressPCL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LauncherAPI\LauncherAPI.csproj">
       <Project>{8962edc5-f590-4f09-a51b-92f8eb1f3d9b}</Project>
       <Name>LauncherAPI</Name>

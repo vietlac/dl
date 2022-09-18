@@ -22,7 +22,7 @@ namespace VietLacSo2022
         private void RemoveMalformAuthorizationHeader(HttpRequestMessage request)
         {
             var authorization = request.Headers.Authorization;
-            if (string.IsNullOrEmpty(authorization.Parameter))
+            if (string.IsNullOrEmpty(authorization?.Parameter))
             {
                 request.Headers.Authorization = null;
             }
