@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "PvZ2rc7z6NPwx8Dl5Wp5J7Q5CdC0chwu+0WqUQc+FqVxA7+UJBrJNm03KaLvQoFEkhlM+rOCoq2CWbxhFAy99Q==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\winlauncher\\VietLacSo2022\\VietLacSo2022.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\aspose.cells\\22.8.0\\aspose.cells.22.8.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\costura.fody\\3.3.3\\costura.fody.3.3.3.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\fody\\4.0.2\\fody.4.0.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windows.sdk.contracts\\10.0.18362.2005\\microsoft.windows.sdk.contracts.10.0.18362.2005.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\11.0.1\\newtonsoft.json.11.0.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\solrnet.core\\1.1.1\\solrnet.core.1.1.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.runtime.windowsruntime\\4.6.0\\system.runtime.windowsruntime.4.6.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.runtime.windowsruntime.ui.xaml\\4.6.0\\system.runtime.windowsruntime.ui.xaml.4.6.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.valuetuple\\4.4.0\\system.valuetuple.4.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\wordpresspcl\\2.0.0\\wordpresspcl.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
