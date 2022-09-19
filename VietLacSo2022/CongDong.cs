@@ -220,5 +220,13 @@ namespace VietLacSo2022
                      Color.FromArgb(r, g, b), 1, ButtonBorderStyle.Dotted, // right
                      Color.FromArgb(r, g, b), 1, ButtonBorderStyle.Dotted);// bottom
         }
+
+        private void vbButton1_Click(object sender, EventArgs e)
+        {
+            DSPM ds = new DSPM();
+            ds.Dock = DockStyle.Fill;
+            this.Parent.Controls.Add(ds);
+            ds.BringToFront();
+        }
     }
 }

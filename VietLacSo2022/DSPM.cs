@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,8 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +19,8 @@ namespace VietLacSo2022
 {
     public partial class DSPM : DevExpress.XtraEditors.XtraUserControl
     {
+        public static string URI2 = "https://vietlac.com/wp-json/wp/v2/product/";
+        AutoCompleteStringCollection col = new AutoCompleteStringCollection();
         public DSPM()
         {
             InitializeComponent();
@@ -45,27 +50,43 @@ namespace VietLacSo2022
             set { tableLayoutPanel1 = value; }
         }
 
-        private void DSPM_Load(object sender, EventArgs e)
+        private async void DSPM_Load(object sender, EventArgs e)
         {
-          
+            textEdit1.MaskBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            textEdit1.MaskBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             
-            try
-            {
-                string connectionstring = "Data Source=ADMIN;Initial Catalog=LacVietSo;Integrated Security=True";
-                SqlConnection conn = new SqlConnection(connectionstring);
-                conn.Open();
-                string query = @"select id, tenphanmem, anhphanmem from phanmem";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                SqlDataReader r = cmd.ExecuteReader();
-                int x = 0, y = 0;
-                while (r.Read())
-                {
-                    int id = Convert.ToInt32(r["id"]); ;
-                    string tenphanmem = r["tenphanmem"].ToString();
-                    Image anhphanmem = Image.FromFile(r["anhphanmem"].ToString());
-                    DanhSachPhanMem_2cs obj = new DanhSachPhanMem_2cs(id, tenphanmem, anhphanmem);
 
-                    tableLayoutPanel1.Controls.Add(obj, y, x);
+            textEdit1.MaskBox.AutoCompleteCustomSource = col;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(URI2);
+            HttpContent content = response.Content;
+            string mycontent = await content.ReadAsStringAsync();
+            HttpContentHeaders headers = content.Headers;
+            MessageBox.Show(mycontent);
+            for (int i = 0; i < mycontent.Length; i++)
+            {
+
+                try
+                {
+                    // string connectionstring = "Data Source=ADMIN;Initial Catalog=LacVietSo;Integrated Security=True";
+                    //SqlConnection conn = new SqlConnection(connectionstring);
+                    //conn.Open();
+                    //string query = @"select id, tenphanmem, anhphanmem from phanmem";
+                    //SqlCommand cmd = new SqlCommand(query, conn);
+                    //SqlDataReader r = cmd.ExecuteReader();
+                    int x = 0, y = 0;
+                    //while (r.Read())
+                    //{
+                    //  int id = Convert.ToInt32(r["id"]); ;
+                    // string tenphanmem = r["tenphanmem"].ToString();
+                    //Image anhphanmem = Image.FromFile(r["anhphanmem"].ToString());
+                    var jo = JObject.Parse(mycontent);
+                    var id = Convert.ToInt32(jo[i]["id"]);
+                    string tenphanmem = jo[i]["slug"].ToString();
+                   // Image anhphanmem = 
+                   // DanhSachPhanMem_2cs obj = new DanhSachPhanMem_2cs(id, tenphanmem, anhphanmem);
+
+                   // tableLayoutPanel1.Controls.Add(obj, y, x);
 
                     y++;
                     if (y >= 5)
@@ -75,15 +96,16 @@ namespace VietLacSo2022
                     }
 
                 }
-                r.Close();
-                //cmd.Clone();
-            }
+                    // r.Close();
+                    //cmd.Clone();
 
-            catch (Exception ex)
-            {
+                catch (Exception ex)
+                {
 
-                MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
 
+                }
+            
             }
             this.textEdit1.AutoSize = false;
             this.textEdit1.Size = new System.Drawing.Size(295, 31);
@@ -112,11 +134,34 @@ namespace VietLacSo2022
 
         private void textEdit1_KeyPress(object sender, KeyPressEventArgs e)
         {
+           
+           
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            MyMessageBox2 newms2 = new MyMessageBox2();
+            newms2.Show();
+        }
+
+        private void textEdit1_Paint(object sender, PaintEventArgs e)
+        {
+           
+        }
+       
+        private void textEdit1_Resize(object sender, EventArgs e)
+        {
+            base.OnResize(e);
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(2, 3, this.Width, this.Height, 15, 15));
+        }
+
+        private void textEdit1_KeyUp(object sender, KeyEventArgs e)
+        {
             while (tableLayoutPanel1.Controls.Count > 0)
             {
                 tableLayoutPanel1.Controls[0].Dispose();
             }
-            if (e.KeyChar == (char)13 && textEdit1.Text != null )
+            if (e.KeyCode == Keys.Enter && textEdit1.Text != null)
             {
                 try
                 {
@@ -158,10 +203,10 @@ namespace VietLacSo2022
                     MessageBox.Show(ex.Message);
 
                 }
-               
+
             }
-            
-            else
+
+            else if(e.KeyCode == Keys.Back)
             {
                 string connectionstring = "Data Source=ADMIN;Initial Catalog=LacVietSo;Integrated Security=True";
                 SqlConnection conn = new SqlConnection(connectionstring);
@@ -189,24 +234,11 @@ namespace VietLacSo2022
                 }
                 r.Close();
             }
-           
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void textEdit1_Click(object sender, EventArgs e)
         {
-            MyMessageBox2 newms2 = new MyMessageBox2();
-            newms2.Show();
-        }
-
-        private void textEdit1_Paint(object sender, PaintEventArgs e)
-        {
-           
-        }
-       
-        private void textEdit1_Resize(object sender, EventArgs e)
-        {
-            base.OnResize(e);
-            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(2, 3, this.Width, this.Height, 15, 15));
+            col.Add(textEdit1.Text);
         }
     }
 }
