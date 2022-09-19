@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
-using WordPressPCL;
 
 namespace VietLacSo2022
 {
@@ -51,7 +50,6 @@ namespace VietLacSo2022
             Client = new HttpClient(clienthandler);
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             SetDefaultHeaders(new Dictionary<string, string> { { "User-Agent", "Mozilla/5.0 (compatible; BrainhubBot/1.0; +http://brainhub.vn/bot.html)" } });
-            WpClient = new WordPressClient(Client);
         }
 
         public void SetDefaultHeaders(IEnumerable<KeyValuePair<string, string>> headers)
@@ -76,8 +74,6 @@ namespace VietLacSo2022
                 }
             }
         }
-
-        public WordPressClient WpClient { get; set; }
 
         public HttpClient Client { get; }
 

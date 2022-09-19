@@ -99,6 +99,12 @@ namespace TestLauncherAPI
             var products = await vlwp.GetProducts(1, 10, "crop-top");
             Console.WriteLine($"{products.ToList().Count} products found!");
 
+            /** test product categories */
+            var totalCates = await vlwp.TotalProductCategories();
+            Console.WriteLine($"total cates {totalCates}");
+            var categories = await vlwp.GetProductCategories();
+            Console.WriteLine($"we have {categories.ToList().Count} cates!");
+
             Console.ReadLine();
         }
     }

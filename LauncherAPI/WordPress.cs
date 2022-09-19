@@ -11,13 +11,15 @@ namespace VietLacSo2022
 {
     public class VietLacWordPress
     {
-        private WordPressClient client;
+        private readonly WordPressClient client;
 
         public VietLacWordPress(string baseUrl)
         {
             Requestor.Instance.BaseAddress = baseUrl;
-            client = Requestor.Instance.WpClient;
-            client.HttpResponsePreProcessing = CustomizeHttpResponse;
+            client = new WordPressClient(Requestor.Instance.Client)
+            {
+                HttpResponsePreProcessing = CustomizeHttpResponse
+            };
         }
 
         public VietLacWordPress(): this("https://vietlac.com/wp-json/")
@@ -127,6 +129,22 @@ namespace VietLacSo2022
         public async Task<int> TotalProducts()
         {
             return await client.Products.GetCountAsync();
+        }
+
+        public async Task<IEnumerable<ProductCategory>> GetProductCategories(int page = 1, int pageSize = 10, string searchPhrase = null)
+        {
+            ProductCategoriesQueryBuilder q = new ProductCategoriesQueryBuilder() { Page = page, PerPage = pageSize, Search = searchPhrase };
+            return await client.ProductCategories.ListCategoriesAsync(q);
+        }
+
+        public async Task<ProductCategory> ProductCategoryDetail(object id)
+        {
+            return await client.ProductCategories.GetCategoryAsync(id);
+        }
+
+        public async Task<int> TotalProductCategories()
+        {
+            return await client.ProductCategories.GetCountAsync();
         }
     }
 }
