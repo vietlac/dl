@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using WordPressPCL;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace VietLacSo2022
 {
@@ -29,12 +31,12 @@ namespace VietLacSo2022
         {
             InitializeComponent();
             dangKy1.Visible = false;
-           
-           
+
+
         }
 
-        public static string sodienthoai2 = "";
-        public static string matkhau2 = "";
+        public static string sodienthoai2 = string.Empty;
+        public static string matkhau2 = string.Empty;
         public string SoDienThoai
         {
             get => sodienthoai2;
@@ -72,8 +74,8 @@ namespace VietLacSo2022
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-           
-           
+
+
 
         }
 
@@ -91,6 +93,7 @@ namespace VietLacSo2022
                 textEdit2.Text = passUser; ;
             }
             this.panelControl3.Paint += PanelControl3_Paint;
+          
 
         }
         private void PanelControl3_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -105,8 +108,8 @@ namespace VietLacSo2022
 
         private void labelControl5_Click(object sender, EventArgs e)
         {
-           // dangKy1.Visible = true;
-           // dangKy1.BringToFront();
+            // dangKy1.Visible = true;
+            // dangKy1.BringToFront();
         }
 
         private void dangKy1_Load(object sender, EventArgs e)
@@ -116,20 +119,20 @@ namespace VietLacSo2022
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
-           
-           
+
+
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dangKy1_Validating(object sender, CancelEventArgs e)
         {
 
         }
-        
+
         private void textEdit1_EditValueChanged(object sender, EventArgs e)
         {
 
@@ -137,22 +140,22 @@ namespace VietLacSo2022
 
         private void textEdit1_TextChanged(object sender, EventArgs e)
         {
-           // sodienthoai2 = textEdit1.Text;
+            // sodienthoai2 = textEdit1.Text;
         }
 
         private void textEdit2_TextChanged(object sender, EventArgs e)
         {
-          //  matkhau2 = textEdit2.Text;
+            //  matkhau2 = textEdit2.Text;
         }
 
         private void checkEdit1_CheckedChanged(object sender, EventArgs e)
         {
-           // if (checkEdit1.Checked)
-           // {
-           //      userName = textEdit1.Text;
-           //      passUser = textEdit2.Text;
+            // if (checkEdit1.Checked)
+            // {
+            //      userName = textEdit1.Text;
+            //      passUser = textEdit2.Text;
             //    Properties.Settings.Default.Save();
-           // }
+            // }
         }
 
         private void checkEdit1_CheckedChanged_1(object sender, EventArgs e)
@@ -167,7 +170,7 @@ namespace VietLacSo2022
 
         private void simpleButton1_Click_2(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textEdit1_EditValueChanged_1(object sender, EventArgs e)
@@ -192,28 +195,40 @@ namespace VietLacSo2022
 
         private void simpleButton2_Click_1(object sender, EventArgs e)
         {
-           
+
         }
 
-        private void vbButton1_Click(object sender, EventArgs e)
+        private async void vbButton1_Click(object sender, EventArgs e)
         {
-            bool accept = true;
-            string connectionstring = "Data Source=ADMIN;Initial Catalog=LacVietSo;Integrated Security=True";
-            SqlConnection conn = new SqlConnection(connectionstring);
-            conn.Open();
-            string query = @"select * from nguoidung";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            SqlDataReader r = cmd.ExecuteReader();
-            while (r.Read())
+           bool accept = true;
+            using (HttpClient client = new HttpClient())
             {
-                if (textEdit1.Text == r["sodienthoai"].ToString() && textEdit2.Text == r["matkhau"].ToString())
+                using (HttpResponseMessage response = await client.GetAsync(DangKy.URI))
                 {
-                    accept = true;
+                    using (HttpContent content = response.Content)
+                    {
+                        string mycontent = await content.ReadAsStringAsync();
+                        HttpContentHeaders headers = content.Headers;
+                        MessageBox.Show(mycontent);
+                    }
                 }
-
-
             }
-            if (accept == true)
+           // string connectionstring = "Data Source=ADMIN;Initial Catalog=LacVietSo;Integrated Security=True";
+          //  SqlConnection conn = new SqlConnection(connectionstring);
+          //  conn.Open();
+          //  string query = @"select * from nguoidung";
+         //   SqlCommand cmd = new SqlCommand(query, conn);
+         //   SqlDataReader r = cmd.ExecuteReader();
+          //  while (r.Read())
+          //  {
+                //if (textEdit1.Text == r["sodienthoai"].ToString() && textEdit2.Text == r["matkhau"].ToString())
+                //{
+                   // accept = true;
+                //}
+
+
+           // }
+          if (accept == true)
             {
                 Screen sc = new Screen();
                 sc.Show();

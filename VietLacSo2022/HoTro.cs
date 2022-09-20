@@ -41,9 +41,15 @@ namespace VietLacSo2022
             panelControl3.BackColor = Color.FromArgb(241, 243, 250);
             panelControl3.LookAndFeel.UseDefaultLookAndFeel = false;
             panelControl3.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            panelControl3.BackColor = Color.White;
-            panelControl3.LookAndFeel.UseDefaultLookAndFeel = false;
-            panelControl3.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            panelControl4.BackColor = Color.White;
+            panelControl4.LookAndFeel.UseDefaultLookAndFeel = false;
+            panelControl4.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            panelControl5.BackColor = Color.White;
+            panelControl5.LookAndFeel.UseDefaultLookAndFeel = false;
+            panelControl5.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            panelControl6.BackColor = Color.White;
+            panelControl6.LookAndFeel.UseDefaultLookAndFeel = false;
+            panelControl6.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
         }
 
         private void panelControl7_Paint(object sender, PaintEventArgs e)
@@ -103,6 +109,11 @@ namespace VietLacSo2022
             linearGradientBrush.InterpolationColors = cblend;
 
             e.Graphics.FillRectangle(linearGradientBrush, panelControl10.ClientRectangle);
+        }
+
+        private void pictureEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

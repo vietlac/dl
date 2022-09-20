@@ -131,8 +131,10 @@
             this.textEdit1.Properties.AutoHeight = false;
             this.textEdit1.Size = new System.Drawing.Size(295, 31);
             this.textEdit1.TabIndex = 0;
+            this.textEdit1.Click += new System.EventHandler(this.textEdit1_Click);
             this.textEdit1.Paint += new System.Windows.Forms.PaintEventHandler(this.textEdit1_Paint);
             this.textEdit1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textEdit1_KeyPress);
+            this.textEdit1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit1_KeyUp);
             this.textEdit1.Resize += new System.EventHandler(this.textEdit1_Resize);
             // 
             // imageCollection1
