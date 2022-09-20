@@ -83,15 +83,16 @@ namespace TestLauncherAPI
             //Console.WriteLine(html);
 
             VietLacWordPress vlwp = new();
-            await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
+            //var user = await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
+            var user = await vlwp.Login("new_customer_123", "secret123");
 
             /** Test user */
-            //var user = await vlwp.RegisterNewUser("test_adfasdfasfdas", "test123@vietlac.com", "secret123");
-            //Console.WriteLine($"register new user {user.Name}/{user.Email}");
-            //user = await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
-            //Console.WriteLine($"Hello {user.Name}, ur password is \"{user.Password}\"");
-            //user = await vlwp.ChangeFullName("Việt Lạc dev");
-            //Console.WriteLine($"Hello {user.Name}, ur password is \"{user.Password}\"");
+            //var user = await vlwp.RegisterNewUser("new_customer_123", "new_customer_123@vietlac.com", "secret123");
+            //Console.WriteLine($"register new user {user.FirstName}/{user.Email}");
+            //user = await vlwp.Login("new_customer_123", "secret123");
+            //Console.WriteLine($"Hello {user.LastName}/{user.Email}, ur password is \"{user.Password}\"");
+            //user = await vlwp.ChangeFullName("Tên riêng", "Tên họ");
+            //Console.WriteLine($"Hello {user.LastName} {user.FirstName}, ur password is \"{user.Password}\"");
 
             /** test product */
             var totalProducts = await vlwp.TotalProducts();
@@ -100,10 +101,10 @@ namespace TestLauncherAPI
             Console.WriteLine($"{products.ToList().Count} products found!");
 
             /** test product categories */
-            var totalCates = await vlwp.TotalProductCategories();
-            Console.WriteLine($"total cates {totalCates}");
-            var categories = await vlwp.GetProductCategories();
-            Console.WriteLine($"we have {categories.ToList().Count} cates!");
+            //var totalCates = await vlwp.TotalProductCategories();
+            //Console.WriteLine($"total cates {totalCates}");
+            //var categories = await vlwp.GetProductCategories();
+            //Console.WriteLine($"we have {categories.ToList().Count} cates!");
 
             Console.ReadLine();
         }
