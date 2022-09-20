@@ -83,8 +83,8 @@ namespace TestLauncherAPI
             //Console.WriteLine(html);
 
             VietLacWordPress vlwp = new();
-            //var user = await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
-            var user = await vlwp.Login("new_customer_123", "secret123");
+            var user = await vlwp.Login("vilapadev", "GUQE9JqsMKwftMnMZVKyZZ4K");
+            //user = await vlwp.Login("new_customer_123", "secret123");
 
             /** Test user */
             //var user = await vlwp.RegisterNewUser("new_customer_123", "new_customer_123@vietlac.com", "secret123");
