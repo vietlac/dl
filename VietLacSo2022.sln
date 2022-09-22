@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1433
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VietLacSo2022", "VietLacSo2022\VietLacSo2022.csproj", "{46F50636-061A-403D-A5F6-9E5246CBB51A}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLauncherAPI", "TestLauncherAPI\TestLauncherAPI.csproj", "{C46952A8-2280-421B-9E35-F8EC3485A806}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordPressPCL", "..\WordPressPCL\WordPressPCL\WordPressPCL.csproj", "{554E423A-0D3C-4959-9166-C0F2DD6D990D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLauncherAPIWinForms", "TestLauncherAPIWinForms\TestLauncherAPIWinForms.csproj", "{470F29B2-B4E7-4467-AA9B-3B71C9A3B5F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554E423A-0D3C-4959-9166-C0F2DD6D990D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{470F29B2-B4E7-4467-AA9B-3B71C9A3B5F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{470F29B2-B4E7-4467-AA9B-3B71C9A3B5F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{470F29B2-B4E7-4467-AA9B-3B71C9A3B5F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{470F29B2-B4E7-4467-AA9B-3B71C9A3B5F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
